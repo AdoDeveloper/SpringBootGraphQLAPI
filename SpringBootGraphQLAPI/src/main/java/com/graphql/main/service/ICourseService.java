@@ -1,6 +1,6 @@
-package com.graphql.example.service;
+package com.graphql.main.service;
 
-import com.graphql.example.entities.Course;
+import com.graphql.main.entities.Course;
 
 import java.util.List;
 

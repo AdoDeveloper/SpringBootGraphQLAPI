@@ -1,8 +1,8 @@
-package com.graphql.example.service.implementation;
+package com.graphql.main.service.implementation;
 
-import com.graphql.example.entities.Course;
-import com.graphql.example.persistence.ICourseDAO;
-import com.graphql.example.service.ICourseService;
+import com.graphql.main.entities.Course;
+import com.graphql.main.persistence.ICourseDAO;
+import com.graphql.main.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
