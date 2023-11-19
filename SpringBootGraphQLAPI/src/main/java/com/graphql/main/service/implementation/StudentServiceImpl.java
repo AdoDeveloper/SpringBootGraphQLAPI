@@ -1,8 +1,11 @@
 package com.graphql.main.service.implementation;
 
-import com.graphql.main.entities.Course;
-import com.graphql.main.persistence.ICourseDAO;
-import com.graphql.main.service.ICourseService;
+import com.graphql.main.entities.Student;
+import com.graphql.main.persistence.IStudentDAO;
+import com.graphql.main.service.IStudentService;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,32 +13,49 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CourseServiceImpl implements ICourseService {
+public class StudentServiceImpl implements IStudentService {
 
     @Autowired
-    private ICourseDAO courseDAO;
+    private IStudentDAO studentDAO;
 
     @Override
     @Transactional(readOnly = true)
-    public Course findById(Long id) {
-        return courseDAO.findById(id).orElseThrow();
+    public Student findById(Long id) {
+        return studentDAO.findById(id).orElse(null);
     }
 
+
     @Override
     @Transactional(readOnly = true)
-    public List<Course> findAll() {
-        return (List<Course>) courseDAO.findAll();
+    public List<Student> findAll() {
+        return (List<Student>) studentDAO.findAll();
     }
 
     @Override
     @Transactional
-    public void createCourse(Course course) {
-        courseDAO.save(course);
+    public void createStudent(Student student) {
+        studentDAO.save(student);
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-        courseDAO.deleteById(id);
+        studentDAO.deleteById(id);
     }
+    
+    @Override
+    @Transactional
+    public void updateStudent(Student updatedStudent) {
+        Student existingStudent = studentDAO.findById(updatedStudent.getId()).orElse(null);
+
+        if (existingStudent != null) {
+            existingStudent.setName(updatedStudent.getName());
+            existingStudent.setLastName(updatedStudent.getLastName());
+            existingStudent.setAge(updatedStudent.getAge());
+            existingStudent.setCourse(updatedStudent.getCourse());
+
+            studentDAO.save(existingStudent);
+        }
+    }
+
 }
