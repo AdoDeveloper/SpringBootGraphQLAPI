@@ -1,5 +1,7 @@
 package com.graphql.main.persistence;
 
-public interface IStudentDAO {
+import com.graphql.main.entities.Student;
+import org.springframework.data.repository.CrudRepository;
 
+public interface IStudentDAO extends CrudRepository<Student, Long> {
 }
